@@ -16,6 +16,6 @@ export const createOptions: ConnectionOptions = {
 	synchronize: true,
 	logging: true,
 	timezone: 'Z',
-	entities: [User, Apt, Post, Notice],
-	charset: 'utf8mb4'
+	entities: ['src/entity/*.ts'],
+	charset: 'utf8mb4' 
 };
