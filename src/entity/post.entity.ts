@@ -1,7 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 import { User } from "./user.entity";
 import { Apt } from "./apt.entity";
+import { Comment } from "./comment.entity";
+import { Like } from "./like.entity";
 
 @Entity({ name: 'post' })
 export class Post {
@@ -33,4 +35,10 @@ export class Post {
     @ManyToOne(() => Apt, apt => apt.id, { nullable: false, onDelete: 'CASCADE' })
 	@JoinColumn({ name: 'apt_id' })
 	apt: Apt;
+
+    @OneToMany(() => Comment, comment => comment.post, { cascade: true })
+    comment: Comment[];
+
+    @OneToMany(() => Like, like => like.post, { cascade: true })
+    like: Like[];
 }

@@ -2,6 +2,8 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 
 import { Apt } from "./apt.entity";
 import { Post } from "./post.entity";
+import { Comment } from "./comment.entity";
+import { Like } from "./like.entity";
 
 @Entity({ name: 'user' })
 export class User {
@@ -35,4 +37,10 @@ export class User {
 
     @OneToMany(() => Post, post => post.user, { cascade: true })
     post: Post[];
+
+    @OneToMany(() => Comment, comment => comment.user, { cascade: true })
+    comment: Comment[];
+
+    @OneToMany(() => Like, like => like.post, { cascade: true })
+    like: Like[];
 }
