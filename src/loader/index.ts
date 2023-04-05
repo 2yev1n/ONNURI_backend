@@ -1,9 +1,10 @@
 import express, { Application } from "express";
-import { connectMongo } from "./connectDatabase";
+
 import { loadExpress } from "./express";
+import { connectDatabase } from "./connectDatabase";
 
 export const initApplication = async () => {
-    connectMongo();
+    connectDatabase();
     const app: Application = express();
     loadExpress(app);
 }
