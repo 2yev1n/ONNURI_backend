@@ -3,17 +3,18 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import { NotFoundURLError } from "../shared/exception";
+import { OnnuriRouter } from "../route/index.router";
 
 const PORT = process.env.PORT || 3000;
 
 export const loadExpress = (app: Application) => {
     app.set('port', PORT);
 
+    app.use(morgan('dev'));
+
     app.use((req: Request, res: Response, next: NextFunction) => {
         express.json()(req, res, next);
     });
-
-    app.use(morgan('dev'));
 
     app.use((req: Request, res: Response, next: NextFunction) => {
         express.urlencoded({ extended: false })(req, res, next)
@@ -27,7 +28,7 @@ export const loadExpress = (app: Application) => {
 
     app.use(cors(CorsOption));
 
-    // app.use('/');
+    app.use('/', OnnuriRouter());
 
     app.use((req: Request, res: Response, next: NextFunction) => {
         next(new NotFoundURLError(req.url));
