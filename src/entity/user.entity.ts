@@ -16,11 +16,11 @@ export class User {
     @Column({ unique: true, length: 40 })
     email: string;
 
-    @Column({ length: 30 })
+    @Column()
     password: string;
 
     @Column()
-    apt_id: string;
+    apt_id: number;
 
     @Column()
     detail_address: string;
