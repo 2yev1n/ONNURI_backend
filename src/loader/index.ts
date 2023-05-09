@@ -4,7 +4,7 @@ import { loadExpress } from "./express";
 import { connectDatabase } from "./connectDatabase";
 
 export const initApplication = async () => {
-    connectDatabase();
+    await connectDatabase();
     const app: Application = express();
     loadExpress(app);
 }
