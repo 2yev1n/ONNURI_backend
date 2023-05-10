@@ -9,5 +9,5 @@ export const LikeServiceRouter = (app: Router) => {
 
     app.use('/post/like', router);
 
-    router.post('/:post_id', verifyTokenLogic, errorHandler(likeController.likePost));
+    router.post('/apt/:apt_id/:post_id', verifyTokenLogic, errorHandler(likeController.likePost));
 }
