@@ -24,3 +24,9 @@ export class PostInfo {
     user_id: number;
     apt_id: number;
 }
+
+export class CommentInfo {
+    user_id: number;
+    post_id: number;
+    content: string;
+}
