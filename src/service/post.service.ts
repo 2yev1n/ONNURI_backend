@@ -28,4 +28,8 @@ export class PostService {
     async findAllPost(apt_id: number) {
         return await this.postRepository.findAllPost(apt_id);
     }
+
+    async searchPost(apt_id: number, search_word: string) {
+        return await this.postRepository.searchPost(apt_id, search_word);
+    }
 }

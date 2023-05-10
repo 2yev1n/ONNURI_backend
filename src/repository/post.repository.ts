@@ -16,6 +16,7 @@ export class PostRepository extends Repository<Post> {
 
     async updatePost(post_id: number, editPostInfo: EditPostInfo): Promise<Post | undefined> {
         this.update(post_id, editPostInfo);
+
         return await this.findOne(post_id);
     }
     
@@ -37,17 +38,35 @@ export class PostRepository extends Repository<Post> {
 
     async findAllPost(apt_id: number): Promise<Post[]> {
         return await this.createQueryBuilder('post')
-        .select('post.id')
-        .addSelect('post.title')
-        .addSelect('post.content')
-        .addSelect('post.apt_id')
-        .addSelect('post.createdAt')
-        .addSelect('post.updatedAt')
-        .addSelect('user.nickname')
-        .addSelect('apt.name')
-        .innerJoin('post.user', 'user')
-        .innerJoin('post.apt', 'apt')
-        .where('post.apt_id = :apt_id', { apt_id })
-        .getRawMany();
+            .select('post.id')
+            .addSelect('post.title')
+            .addSelect('post.content')
+            .addSelect('post.apt_id')
+            .addSelect('post.createdAt')
+            .addSelect('post.updatedAt')
+            .addSelect('user.nickname')
+            .addSelect('apt.name')
+            .innerJoin('post.user', 'user')
+            .innerJoin('post.apt', 'apt')
+            .where('post.apt_id = :apt_id', { apt_id })
+            .getRawMany();
+    }
+
+    async searchPost(apt_id: number, search_word: string): Promise<Post[]> {
+            return this.createQueryBuilder('post')
+            .select('post.id')
+            .addSelect('post.title')
+            .addSelect('post.content')
+            .addSelect('post.apt_id')
+            .addSelect('post.createdAt')
+            .addSelect('post.updatedAt')
+            .addSelect('user.nickname')
+            .addSelect('apt.name')
+            .innerJoin('post.user', 'user')
+            .innerJoin('post.apt', 'apt')
+            .where('post.apt_id = :apt_id', { apt_id })
+            .where('post.title like :search_word OR post.content like :search_word',
+            { search_word: `%${search_word}%` })
+            .getRawMany();
     }
 }

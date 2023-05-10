@@ -40,4 +40,13 @@ export class PostController {
 
         return res.status(200).json(response);
     }
+
+    public searchPost: BusinessLogic = async(req, res, next) => {
+        const apt_id = +req.params.apt_id;
+        const search_word = req.query.where as string;
+        
+        const response = await this.postService.searchPost(apt_id, search_word);
+
+        return res.status(200).json(response);
+    }
 }

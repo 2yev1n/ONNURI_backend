@@ -13,4 +13,5 @@ export const postServiceRouter = (app: Router) => {
     router.patch('/:apt_id/post/:post_id', verifyTokenLogic, errorHandler(postController.updatePost));
     router.get('/:apt_id/post/:post_id', verifyTokenLogic, errorHandler(postController.findOnePost));
     router.get('/:apt_id/post', verifyTokenLogic, errorHandler(postController.findAllPost));
+    router.get('/:apt_id/search', verifyTokenLogic, errorHandler(postController.searchPost));
 }
