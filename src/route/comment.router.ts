@@ -11,4 +11,5 @@ export const CommentServiceRouter = (app: Router) => {
 
     router.post('/apt/:apt_id/:post_id', verifyTokenLogic, errorHandler(commentController.createComment));
     router.get('/apt/:apt_id/:post_id',verifyTokenLogic, errorHandler(commentController.findCommentOfPost));
+    router.delete('/apt/:apt_id/:post_id/:comment_id',verifyTokenLogic, errorHandler(commentController.deleteComment));    
 }

@@ -14,6 +14,24 @@ export class CommentRepository extends Repository<Comment> {
         return await this.save(newComment);
     }
 
+    async deleteComment(comment_id: number) {
+        return await this.delete(comment_id);
+    }
+
+    async findOneComment(comment_id: number): Promise<Comment | undefined> {
+        return await this.createQueryBuilder('comment')
+        .select('comment.id')
+        .addSelect('comment.content')
+        .addSelect('comment.post_id')
+        .addSelect('comment.user_id')
+        .addSelect('comment.createdAt')
+        .addSelect('comment.updatedAt')
+        .addSelect('user.nickname')
+        .innerJoin('comment.user', 'user')
+        .where('comment.id = :comment_id', { comment_id })
+        .getOne();
+    }
+
     async findCommentOfPost(post_id: number): Promise<Comment[]> {
         return await this.createQueryBuilder('comment')
             .select('comment.id')

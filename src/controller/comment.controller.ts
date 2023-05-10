@@ -17,6 +17,15 @@ export class CommentController {
         return res.status(201).json(response);
     }
 
+    public deleteComment: BusinessLogic = async(req, res, next) => {
+        const comment_id = +req.params.comment_id;
+        const user = (<any>req).decoded;
+
+        await this.commentService.deleteComment(comment_id, user);
+
+        return res.status(200).json({ message : 'Delete Comment Success' });
+    }
+
     public findCommentOfPost: BusinessLogic = async(req, res, next) => {
         const post_id = +req.params.post_id;
         const user = (<any>req).decoded;
