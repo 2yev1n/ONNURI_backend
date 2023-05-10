@@ -15,7 +15,9 @@ export const verifyTokenLogic: BusinessLogic = (req, res, next) => {
                 process.env.JWT_KEY!,
             ) as unknown as TokenPayload;
 
-            if(apt_id !== payload.apt_id) throw new ForbiddenError();
+            if(apt_id) {
+                if(apt_id !== payload.apt_id) throw new ForbiddenError();
+            }
 
             (<any>req).decoded = payload;
             next();
