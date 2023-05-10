@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 import { Post } from "./post.entity";
 
@@ -10,6 +10,12 @@ export class Like {
     @PrimaryColumn()
     post_id: number;
 
+    @CreateDateColumn({ type: 'timestamp' })
+	createdAt: Date;
+
+	@UpdateDateColumn({ type: 'timestamp' })
+	updatedAt: Date;
+    
     @ManyToOne(() => User, user => user.id, { nullable: false, onDelete: 'CASCADE' })
 	@JoinColumn({ name: 'user_id' })
 	user: User;
