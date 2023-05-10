@@ -25,6 +25,15 @@ export class PostController {
         return res.status(200).json(response);
     }
 
+    public deletePost: BusinessLogic = async(req, res, next) => {
+        const post_id = +req.params.post_id;
+        const user = (<any>req).decoded;
+
+        await this.postService.deletePost(post_id, user);
+
+        return res.status(200).json({ message: 'Delete Post Success' });
+    }
+
     public findOnePost: BusinessLogic = async(req, res, next) => {
         const post_id = +req.params.post_id;
 
@@ -44,7 +53,7 @@ export class PostController {
     public searchPost: BusinessLogic = async(req, res, next) => {
         const apt_id = +req.params.apt_id;
         const search_word = req.query.where as string;
-        
+
         const response = await this.postService.searchPost(apt_id, search_word);
 
         return res.status(200).json(response);

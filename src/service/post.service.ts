@@ -1,7 +1,7 @@
 import { User } from "../entity/user.entity";
 import { PostRepository } from "../repository/post.repository";
 import { EditPostInfo, PostInfo } from "../shared/DataTransferObject";
-import { ForbiddenError } from "../shared/exception";
+import { ForbiddenError, NotFoundError } from "../shared/exception";
 
 export class PostService {
     constructor(
@@ -19,6 +19,15 @@ export class PostService {
         if (post?.user_id !== user.id) throw new ForbiddenError();
         
         return await this.postRepository.updatePost(post_id, editPostInfo);
+    }
+
+    async deletePost(post_id: number, user: User) {
+        const post = await this.postRepository.findOnePost(post_id);
+        
+        if(!post) throw new NotFoundError('Not Found Post');
+        else if(post?.user_id !== user.id) throw new ForbiddenError();
+    
+        return await this.postRepository.deletePost(post_id);
     }
 
     async findOnePost(post_id: number) {

@@ -19,6 +19,10 @@ export class PostRepository extends Repository<Post> {
 
         return await this.findOne(post_id);
     }
+
+    async deletePost(post_id: number) {
+        return await this.delete(post_id);
+    }
     
     async findOnePost(post_id: number): Promise<Post | undefined> {
         return await this.createQueryBuilder('post')
@@ -26,14 +30,16 @@ export class PostRepository extends Repository<Post> {
             .addSelect('post.title')
             .addSelect('post.content')
             .addSelect('post.apt_id')
+            .addSelect('post.user_id')
             .addSelect('post.createdAt')
             .addSelect('post.updatedAt')
             .addSelect('user.nickname')
             .addSelect('apt.name')
+            .loadRelationCountAndMap('post.like_count', 'post.like')
             .innerJoin('post.user', 'user')
             .innerJoin('post.apt', 'apt')
             .where('post.id = :post_id', { post_id })
-            .getRawOne();
+            .getOne();
     }
 
     async findAllPost(apt_id: number): Promise<Post[]> {
@@ -42,14 +48,16 @@ export class PostRepository extends Repository<Post> {
             .addSelect('post.title')
             .addSelect('post.content')
             .addSelect('post.apt_id')
+            .addSelect('post.user_id')
             .addSelect('post.createdAt')
             .addSelect('post.updatedAt')
             .addSelect('user.nickname')
             .addSelect('apt.name')
+            .loadRelationCountAndMap('post.like_count', 'post.like')
             .innerJoin('post.user', 'user')
             .innerJoin('post.apt', 'apt')
             .where('post.apt_id = :apt_id', { apt_id })
-            .getRawMany();
+            .getMany();
     }
 
     async searchPost(apt_id: number, search_word: string): Promise<Post[]> {
@@ -58,15 +66,17 @@ export class PostRepository extends Repository<Post> {
             .addSelect('post.title')
             .addSelect('post.content')
             .addSelect('post.apt_id')
+            .addSelect('post.user_id')
             .addSelect('post.createdAt')
             .addSelect('post.updatedAt')
             .addSelect('user.nickname')
             .addSelect('apt.name')
             .innerJoin('post.user', 'user')
             .innerJoin('post.apt', 'apt')
+            .loadRelationCountAndMap('post.like_count', 'post.like')
             .where('post.apt_id = :apt_id', { apt_id })
             .where('post.title like :search_word OR post.content like :search_word',
             { search_word: `%${search_word}%` })
-            .getRawMany();
+            .getMany();
     }
 }
