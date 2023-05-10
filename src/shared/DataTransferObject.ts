@@ -13,7 +13,7 @@ export class UserLoginInfo {
     password: string;
 }
 
-export class CreatePostInfo {
+export class EditPostInfo {
     title: string;
     content: string;
 }
