@@ -1,7 +1,6 @@
 export interface TokenPayload {
-	type: 'access' | 'refresh';
-	sub: number;
+	id: number;
+	apt_id: number;
 	iat: number;
 	exp: number;
-	iss: string;
 }
