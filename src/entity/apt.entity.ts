@@ -9,7 +9,7 @@ export class Apt {
     id: number;
 
     @Column({ unique: true })
-    apt_name: string;
+    name: string;
 
     @Column({ unique: true })
     location: string;
