@@ -13,4 +13,8 @@ export class CommentService {
 
         return await this.commentRepository.createComment(commentInfo);
     }
+
+    async findCommentOfPost(post_id: number): Promise<Comment[]> {
+        return await this.commentRepository.findCommentOfPost(post_id);
+    }
 }
