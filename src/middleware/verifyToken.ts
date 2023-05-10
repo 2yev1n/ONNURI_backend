@@ -20,7 +20,7 @@ export const verifyTokenLogic: BusinessLogic = (req, res, next) => {
             (<any>req).decoded = payload;
             next();
         } catch(err) {
-            console.error(err);
-            throw new UnAuthorizedError();
+            console.log(err);
+            throw err;
         }
 };
