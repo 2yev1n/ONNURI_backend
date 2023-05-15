@@ -30,3 +30,14 @@ export class CommentInfo {
     post_id: number;
     content: string;
 }
+
+export class NoticeInfo {
+    apt_id: number;
+    title: string;
+    content: string;
+}
+
+export class ReqNoticeInfo {
+    title: string;
+    content: string;
+}
