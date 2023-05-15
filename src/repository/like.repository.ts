@@ -1,6 +1,5 @@
 import { EntityRepository, Repository, getCustomRepository } from "typeorm";
 import { Like } from "../entity/like.entity";
-import { Post } from "../entity/post.entity";
 import { User } from "../entity/user.entity";
 
 @EntityRepository(Like)
