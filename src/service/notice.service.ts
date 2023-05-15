@@ -24,5 +24,8 @@ export class NoticeService {
     async findAllNotice(apt_id: number) {
         return await this.noticeRepository.findAllNotice(apt_id);
     }
-    
+
+    async findOneNotice(notice_id: number) {
+        return await this.noticeRepository.findOneNotice(notice_id);
+    }
 }

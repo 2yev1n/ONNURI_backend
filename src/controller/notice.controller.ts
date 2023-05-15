@@ -31,4 +31,12 @@ export class NoticeController {
 
         return res.status(200).json(response);
     }
+
+    public findOneNotice: BusinessLogic = async(req, res, next) => {
+        const notice_id = +req.params.notice_id;
+
+        const response = await this.noticeService.findOneNotice(notice_id);
+
+        return res.status(200).json(response);
+    }
 }
