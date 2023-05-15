@@ -15,4 +15,12 @@ export class NoticeController {
 
         return res.status(201).json(response);
     }
+
+    public deleteNotice: BusinessLogic = async(req, res, next) => {
+        const notice_id = +req.params.notice_id;
+        
+        const response = await this.noticeService.deleteNotice(notice_id);
+
+        return res.status(200).json({ meesage : 'Delete Notice Success' });
+    }
 }

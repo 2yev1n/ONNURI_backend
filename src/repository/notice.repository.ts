@@ -12,4 +12,36 @@ export class NoticeRepository extends Repository<Notice> {
         const newNotice = this.create(noticeInfo);
         return await this.save(newNotice);
     }
+
+    async deleteNotice(notice_id: number) {
+        return await this.delete(notice_id);
+    }
+
+    async findOneNotice(notice_id: number): Promise<Notice | undefined> {
+        return await this.createQueryBuilder('notice')
+            .select('notice.id')
+            .addSelect('notice.title')
+            .addSelect('notice.content')
+            .addSelect('notice.createdAt')
+            .addSelect('notice.updatedAt')
+            .addSelect('notice.apt_id')
+            .addSelect('apt.name')
+            .innerJoin('notice.apt', 'apt')
+            .where('notice.id = :notice_id', { notice_id })
+            .getOne();
+    }
+
+    async findAllNotice(apt_id: number): Promise<Notice | undefined> {
+        return await this.createQueryBuilder('notice')
+            .select('notice.id')
+            .addSelect('notice.title')
+            .addSelect('notice.content')
+            .addSelect('notice.createdAt')
+            .addSelect('notice.updatedAt')
+            .addSelect('notice.apt_id')
+            .addSelect('apt.name')
+            .innerJoin('notice.apt', 'apt')
+            .where('notice.apt_id = :apt_id', { apt_id })
+            .getOne();
+    }
 }
