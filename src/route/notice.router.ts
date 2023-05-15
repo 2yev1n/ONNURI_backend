@@ -11,4 +11,5 @@ export const NoticeServiceRouter = (app: Router) => {
 
     router.post('/:apt_id/notice', verifyTokenLogic, errorHandler(noticeController.createNotice));
     router.delete('/:apt_id/notice/:notice_id', verifyTokenLogic, errorHandler(noticeController.deleteNotice));
+    router.get('/:apt_id/notice', verifyTokenLogic, errorHandler(noticeController.findAllNotice));
 }

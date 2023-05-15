@@ -20,4 +20,9 @@ export class NoticeService {
         if(!notice) throw new NotFoundError();
         return await this.noticeRepository.deleteNotice(notice_id);
     }
+
+    async findAllNotice(apt_id: number) {
+        return await this.noticeRepository.findAllNotice(apt_id);
+    }
+    
 }

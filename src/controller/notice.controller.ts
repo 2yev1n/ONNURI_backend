@@ -23,4 +23,12 @@ export class NoticeController {
 
         return res.status(200).json({ meesage : 'Delete Notice Success' });
     }
+
+    public findAllNotice: BusinessLogic = async(req, res, next) => {
+        const apt_id = +req.params.apt_id;
+
+        const response = await this.noticeService.findAllNotice(apt_id);
+
+        return res.status(200).json(response);
+    }
 }
