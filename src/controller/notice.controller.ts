@@ -1,6 +1,7 @@
 import { NoticeRepository } from "../repository/notice.repository";
 import { NoticeService } from "../service/notice.service";
 import { BusinessLogic } from "../shared/BusinessLogicInterface";
+import { ReqNoticeInfo } from "../shared/DataTransferObject";
 
 export class NoticeController {
     private noticeService: NoticeService = new NoticeService(
@@ -9,7 +10,7 @@ export class NoticeController {
 
     public createNotice: BusinessLogic = async(req, res, next) => {
         const apt_id = +req.params.apt_id;
-        const reqNoticeInfo = req.body;
+        const reqNoticeInfo = req.body as ReqNoticeInfo;
 
         const response = await this.noticeService.createNotice(apt_id, reqNoticeInfo);
 
