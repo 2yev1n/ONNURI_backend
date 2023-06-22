@@ -17,10 +17,10 @@ export class  Comment {
     user_id: number;
 
     @CreateDateColumn({ type: 'timestamp' })
-	createdAt: Date;
+	created_at: Date;
 
 	@UpdateDateColumn({ type: 'timestamp' })
-	updatedAt: Date;
+	updated_at: Date;
 
     @ManyToOne(() => User, user => user.id, { nullable: false, onDelete: 'CASCADE' })
 	@JoinColumn({ name: 'user_id' })

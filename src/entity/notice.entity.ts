@@ -17,10 +17,10 @@ export class Notice {
     content: string;
 
     @CreateDateColumn({ type: 'timestamp' })
-	createdAt: Date;
+	created_at: Date;
 
 	@UpdateDateColumn({ type: 'timestamp' })
-	updatedAt: Date;
+	updated_at: Date;
 
     @ManyToOne(() => Apt, apt => apt.id, { nullable: false, onDelete: 'CASCADE' })
 	@JoinColumn({ name: 'apt_id' })

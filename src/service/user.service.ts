@@ -24,12 +24,12 @@ export class UserService {
         const hashPassword = generateHash(userInfo.password);
 
         const userInfoCreate = { ...userInfo, password: hashPassword };
-        const { id, createdAt, updatedAt } = await this.userRepository.createUser(userInfoCreate);
+        const { id, created_at, updated_at } = await this.userRepository.createUser(userInfoCreate);
 
         return {
             id,
-            createdAt, 
-            updatedAt
+            created_at, 
+            updated_at
         }
     }
 
